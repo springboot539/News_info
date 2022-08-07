@@ -46,7 +46,6 @@ public class NewsInfoAdpter extends FragmentStatePagerAdapter {
      * @param position
      * @return
      */
-
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {

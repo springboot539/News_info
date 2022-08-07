@@ -96,8 +96,6 @@ public class InfoItemAdapter extends BaseAdapter {
             holder.iv3.setVisibility(View.VISIBLE);
             mImageLoader.displayImage(pic1, holder.iv3, mOptions);
         }
-
-
         return convertView;
     }
 
