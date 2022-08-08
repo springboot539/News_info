@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.news_info.adapter.NewsInfoAdpter;
 import com.example.news_info.bean.TypeBean;
+import com.example.news_info.db.DBManager;
 import com.example.news_info.fragment.NewsInfoFragment;
 import com.example.news_info.view.PagerSlidingTabStrip;
 
@@ -36,14 +38,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private final int REQUEST_CODE_ADDRESS = 100;
 
-    private void checkPermissioin(){
+    private void checkPermissioin() {
         int checkInternet = checkSelfPermission(Manifest.permission.INTERNET);
         int checkInternetState = checkSelfPermission(Manifest.permission.ACCESS_NETWORK_STATE);
-        if (checkInternet == PackageManager.PERMISSION_GRANTED  && checkInternetState == PackageManager.PERMISSION_GRANTED) {
+        if (checkInternet == PackageManager.PERMISSION_GRANTED && checkInternetState == PackageManager.PERMISSION_GRANTED) {
             //已经授权
             Toast.makeText(this, "不用请求已经有了权限", Toast.LENGTH_SHORT).show();
         } else {//没有权限
-            requestPermissions( new String[]{Manifest.permission.INTERNET,Manifest.permission.ACCESS_NETWORK_STATE},REQUEST_CODE_ADDRESS);//申请授权
+            requestPermissions(new String[]{Manifest.permission.INTERNET, Manifest.permission.ACCESS_NETWORK_STATE}, REQUEST_CODE_ADDRESS);//申请授权
 
         }
     }
@@ -56,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // Permission Granted 授予权限
                     //处理授权之后逻辑
-                     Toast.makeText(this, "已经获取权限", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "已经获取权限", Toast.LENGTH_SHORT).show();
                 } else {
                     // Permission Denied 权限被拒绝
                     Toast.makeText(this, "拒绝权限，无法使用！请手动代开权限", Toast.LENGTH_SHORT).show();
@@ -89,7 +91,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initPager() {
-        List<TypeBean> typeList = TypeBean.getTypeList();
+//        List<TypeBean> typeList = TypeBean.getTypeList();
+        List<TypeBean> typeList = DBManager.getSelectedTypeList();
         mTypeBeanList.addAll(typeList);
         for (int i = 0; i < mTypeBeanList.size(); i++) {
             TypeBean typeBean = mTypeBeanList.get(i);
@@ -104,6 +107,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.main_iv_add:
+                startActivity(new Intent(MainActivity.this, AddItemActivity.class));
+                break;
+        }
+    }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        mFragmentList.clear();
+        mTypeBeanList.clear();
+
+        initPager();
+        mAdpter.notifyDataSetChanged();
+        mTabStrip.notifyDataSetChanged();
     }
 }

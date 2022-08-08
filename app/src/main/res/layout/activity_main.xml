@@ -20,7 +20,7 @@
             android:layout_weight="1"
             app:pstsDividerColor="#ffff00"
             app:pstsIndicatorHeight="8dp"
-            app:pstsTabBackground="@color/white"
+            app:pstsTabBackground="@color/grey"
             app:pstsDividerPadding="@dimen/dimension1"
             app:pstsShouldExpand="true"
             app:pstsUnderlineColor="#FE098662"

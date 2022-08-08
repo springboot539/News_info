@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.example.news_info.db.DBManager;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -20,6 +21,9 @@ public class UniteApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        //声明全局的数据库对象
+        DBManager.initDB(this);
+
         httpQueue = Volley.newRequestQueue(this);
         initImageLoader(getApplicationContext());
     }

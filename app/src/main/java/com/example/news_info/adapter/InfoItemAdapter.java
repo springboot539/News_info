@@ -106,7 +106,7 @@ public class InfoItemAdapter extends BaseAdapter {
         public ViewHolder(View view) {
             titleTv = view.findViewById(R.id.item_newsfrag_tv_title);
             sourceTv = view.findViewById(R.id.item_tv_source);
-            titleTv = view.findViewById(R.id.item_tv_time);
+            timeTv = view.findViewById(R.id.item_tv_time);
             iv1 = view.findViewById(R.id.item_news_iv);
             iv2 = view.findViewById(R.id.item_news_iv2);
             iv3 = view.findViewById(R.id.item_news_iv3);

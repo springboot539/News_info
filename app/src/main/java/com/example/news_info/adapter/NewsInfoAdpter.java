@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.PagerAdapter;
 
 import com.example.news_info.bean.TypeBean;
 
@@ -26,8 +27,9 @@ public class NewsInfoAdpter extends FragmentStatePagerAdapter {
         mTypeBeanList = typeBeanList;
     }
 
-    public NewsInfoAdpter(FragmentManager fm) {
-        super(fm);
+    @Override
+    public int getItemPosition(@NonNull Object object) {
+        return PagerAdapter.POSITION_NONE;
     }
 
     @NonNull
